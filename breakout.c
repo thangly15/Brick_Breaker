@@ -233,7 +233,7 @@ int main(int argc, char** argv) {
                     if (ball.pos.x + BALL_SIZE >= brick_x &&
                         ball.pos.x <= brick_x + BRICK_WIDTH &&
                         ball.pos.y + BALL_SIZE >= brick_y &&
-                        ball.pos.y <= brick_y + BRICK_HEIGHT) {
+                        ball.pos.y <= brick_y + BRICK_HEIGHT) {// If the ball collides with the current brick, we set that brick to empty to remove it from the game and also reverse the ball's y velocity to make it bounce back downwards towards the paddle
 
                             bricks[index] = CELL_EMPTY;
 
@@ -245,9 +245,9 @@ int main(int argc, char** argv) {
             }
         }
 
-        int remaining_bricks = 0;
+        int remaining_bricks = 0;// initialize count for brick left on screen
 
-        for (int i = 0; i < BRICK_ROWS * BRICK_COLS; i++) {
+        for (int i = 0; i < BRICK_ROWS * BRICK_COLS; i++) {// Loop through all bricks to count how many are still active. If there are no active bricks left, it means the player has won the game by breaking all the bricks, so we set the game won state to true to end the game and display the win message
             if (bricks[i] == CELL_ACTIVE) {
                 remaining_bricks++;
             }
@@ -309,7 +309,7 @@ int main(int argc, char** argv) {
 
     SDL_RenderFillRect(renderer, &ball_rect);
 
-    if (game_won) {
+    if (game_won) {// If the game is won, we set the window title to display the win message
         SDL_SetWindowTitle(window, "Breakout - YOU WIN!");
     } else if (game_over) {
         SDL_SetWindowTitle(window, "Breakout - GAME OVER");
